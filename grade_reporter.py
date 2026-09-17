@@ -1,44 +1,43 @@
-# List of numeric test grades
-grades = [88, 92, 79, 64, 95, 81]
+# Exact input data required
+scores = [72, 45, 90, 61, 38]
 
-# Initialize variables to build up totals and counts
+# Track metrics
+passes = 0
+failures = 0
 total_score = 0
-letter_counts = {
-    "A": 0,
-    "B": 0,
-    "C": 0,
-    "D": 0,
-    "F": 0
-}
 
-print("Individual Grades & Letter Categories:")
-print("-" * 38)
+print("Individual Grades & Status:")
+print("-" * 30)
 
-# Loop through each grade and apply conditional logic
-for grade in grades:
-    total_score += grade
+# Loop through scores and apply specific grading scale
+for score in scores:
+    total_score += score
     
-    if grade >= 90:
-        letter = "A"
-    elif grade >= 80:
-        letter = "B"
-    elif grade >= 70:
-        letter = "C"
-    elif grade >= 60:
-        letter = "D"
+    # Grading scale:
+    # 80 and above: A
+    # 70 to 79: B
+    # 50 to 69: C
+    # Below 50: F
+    if score >= 80:
+        grade = "A"
+        passes += 1
+    elif score >= 70:
+        grade = "B"
+        passes += 1
+    elif score >= 50:
+        grade = "C"
+        passes += 1
     else:
-        letter = "F"
+        grade = "F"
+        failures += 1
         
-    letter_counts[letter] += 1
-    print(f"Grade: {grade} -> Letter Grade: {letter}")
+    print(f"Score: {score} -> Grade: {grade}")
 
-# Calculate average
-average = total_score / len(grades)
+# Calculate average rounded to 1 decimal place
+average = round(total_score / len(scores), 1)
 
-print("\nSummary Report:")
-print("-" * 38)
-print(f"Total Students Processed: {len(grades)}")
-print(f"Class Average: {average:.2f}")
-print("Grade Distribution:")
-for letter, count in letter_counts.items():
-    print(f"  {letter}: {count}")
+print("\nSummary Metrics:")
+print("-" * 30)
+print(f"Passes: {passes}")
+print(f"Failures: {failures}")
+print(f"Average: {average}")
